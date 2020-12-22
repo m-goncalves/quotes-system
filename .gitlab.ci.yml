@@ -1,0 +1,9 @@
+stages:
+  - install
+  - test
+  - release
+
+install:
+  stage: install
+  script:
+    - docker image build -t marjugoncalves/quotesapi:1.0:
