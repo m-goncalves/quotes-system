@@ -1,3 +1,9 @@
+auth/*
 configmap.yaml
 .env
 secrets.yaml
+.terraform*
+terraform.tfstate.backup
+terraform.tfstate
+variables.tf
+
