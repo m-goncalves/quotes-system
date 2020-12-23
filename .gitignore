@@ -1,9 +1,11 @@
-auth/*
+auth/
 configmap.yaml
 .env
+production.tfvars
 secrets.yaml
 .terraform*
 terraform.tfstate.backup
 terraform.tfstate
+testing.tfvars
 variables.tf
 
