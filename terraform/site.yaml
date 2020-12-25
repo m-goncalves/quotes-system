@@ -1,0 +1,4 @@
+- name: Apply common configuration to all nodes.
+  hosts: localhost
+  roles:
+    - common
