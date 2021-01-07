@@ -29,4 +29,3 @@ spec:
         envFrom:
           - configMapRef:
               name: backend
-# add health check and HPA
