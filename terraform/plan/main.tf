@@ -28,3 +28,11 @@ resource "google_storage_bucket" "state_bucket"{
   location            = var.region
   force_destroy       = true 
 }
+
+# data "terraform_remote_state" "quotes-state" {
+#   backend             = "gcs"
+#   config              = {
+#     bucket            = var.bucket_name
+#     prefix            = var.prefix
+#   }
+# }
