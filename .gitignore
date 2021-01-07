@@ -1,10 +1,21 @@
 auth/
+commands
 configmap.yaml
+crash.log
 .env
-*.tfvars
+localhost.yaml
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.retry
 secrets.yaml
+*tfplan*
+*.tfvars
 .terraform*
 terraform.tfstate.backup
-terraform.tfstate
+*.tfstate
+.tfstate.*
 variables.tf
+
 
