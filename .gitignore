@@ -1,4 +1,5 @@
 auth/
+backend.tf
 commands
 configmap.yaml
 crash.log
@@ -8,6 +9,7 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+problems
 *.retry
 secrets.yaml
 *tfplan*
