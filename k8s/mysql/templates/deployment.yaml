@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels: 
+    app: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        envFrom:
+        - configMapRef:
+            name: mysql
+        ports:
+        - containerPort: 3306
+          name: mysql
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - "bash" 
+        #     - "-c"
+        #     - "mysql --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} --execute=\"SELECT 1;\""
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+          subPath: mysql
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: pvc-mysql
