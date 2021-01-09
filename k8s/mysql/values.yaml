@@ -1,6 +1,6 @@
 deployment:
   replicaCount: 1
-name: quotes-api
+name: mysql
 image:
   repository: dockerhub
   pullPolicy: IfNotPresent
