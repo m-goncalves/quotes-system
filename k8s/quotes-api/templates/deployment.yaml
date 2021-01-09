@@ -18,6 +18,10 @@ spec:
         - name: {{ .Values.initContainers.name }}
           image: {{ .Values.initContainers.image }}
           command: ['sh', '-c', 'until nslookup mysql.default.svc.cluster.local; do echo waiting for mysql; sleep 2; done;']
+      #     command:
+      #     - "sh"
+      #     - "-c"
+      #     - "until mysql --host=mysql.default.svc.cluster.local --user={MYSQL_USER} --password={MYSQL_PASSWORD} --execute=\"SELECT 1;\"; do echo waiting for mysql; sleep 2; done;" 
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image.name }}
@@ -30,3 +34,9 @@ spec:
         envFrom:
           - configMapRef:
               name: {{ .Values.name }}
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
