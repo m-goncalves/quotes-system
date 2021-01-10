@@ -9,6 +9,5 @@ spec:
   - name: {{ .Values.ports.name }} 
     port: {{ .Values.ports.port }}
     targetPort: {{ .Values.ports.containerPort }}
-    nodePort: {{ .Values.ports.nodePort }}
-  type: LoadBalancer
+  clusterIP: None
 
