@@ -12,18 +12,18 @@ spec:
       storage: 1Gi
 ---
 # not necessary when deploying in gcloud
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-{{ .Values.name }}
-  labels:
-    app: {{ .Values.name }}
-spec: 
-  storageClassName: standard
-  capacity:
-    storage: 300Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /home/docker
-  persistentVolumeReclaimPolicy: Retain
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: pv-{{ .Values.name }}
+#   labels:
+#     app: {{ .Values.name }}
+# spec: 
+#   storageClassName: standard
+#   capacity:
+#     storage: 300Mi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: /home/docker
+#   persistentVolumeReclaimPolicy: Retain
