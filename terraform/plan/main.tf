@@ -1,10 +1,11 @@
-provider "google" {
+provider "google-beta" {
     credentials       = file(var.credentials)
     project           = var.project
     region            = var.region
 }
 
 resource "google_container_cluster" "primary" {
+  provider            = google-beta
   name                = var.cluster_name
   network             = var.network
   location            = var.region
@@ -12,6 +13,7 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_container_node_pool" "primary_preemtible_nodes" {
+  project             = var.project
   name                = var.node_name
   location            = var.region
   cluster             = google_container_cluster.primary.name
@@ -23,11 +25,11 @@ resource "google_container_node_pool" "primary_preemtible_nodes" {
   }
 }
 
-resource "google_storage_bucket" "state_bucket"{
-  name                = var.bucket_name 
-  location            = var.region
-  force_destroy       = true 
-}
+# resource "google_storage_bucket" "state_bucket"{
+#   name                = var.bucket_name 
+#   location            = var.region
+#   force_destroy       = true 
+# }
 
 # data "terraform_remote_state" "quotes-state" {
 #   backend             = "gcs"
