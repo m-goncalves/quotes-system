@@ -18,6 +18,7 @@ secrets.yaml
 terraform.tfstate.backup
 *.tfstate
 .tfstate.*
+todo
 variables.tf
 
 
