@@ -17,7 +17,7 @@ spec:
       initContainers:
         - name: {{ .Values.initContainers.name }}
           image: {{ .Values.initContainers.image }}
-          command: ['sh', '-c', 'until nslookup mysql.default.svc.cluster.local; do echo waiting for mysql; sleep 2; done;']
+          command: ['sh', '-c', 'until nslookup mysql.quotes-system.svc.cluster.local; do echo waiting for mysql; sleep 2; done;']
       #     command:
       #     - "sh"
       #     - "-c"

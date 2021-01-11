@@ -10,4 +10,4 @@ spec:
   http:
   - route:
     - destination:
-        host: quotes-api.default.svc.cluster.local
+        host: quotes-api.quotes-system.svc.cluster.local
