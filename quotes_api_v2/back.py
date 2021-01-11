@@ -20,6 +20,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = url
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
+@app.route('/version', methods=['GET'])
+def version():
+    return json.dumps({'version':'2'}), 200, {'ContentType':'application/json'}
+
 @app.route('/healthz', methods=['GET'])
 def healthz():
     try:
