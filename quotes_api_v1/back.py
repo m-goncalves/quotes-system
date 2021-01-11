@@ -23,6 +23,7 @@ db = SQLAlchemy(app)
 @app.route('/version', methods=['GET'])
 def version():
     return json.dumps({'version':'1'}), 200, {'ContentType':'application/json'}
+
 @app.route('/healthz', methods=['GET'])
 def healthz():
     try:
