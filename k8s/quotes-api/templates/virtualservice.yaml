@@ -6,7 +6,7 @@ spec:
   hosts:
   - "*"
   gateways:
-  - default/quotes-gateway
+  - quotes-system/quotes-gateway
   http:
   - route:
     - destination:
