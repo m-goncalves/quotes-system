@@ -1,4 +1,0 @@
-- name: Template backend
-  template:
-      dest: "{{ playbook_dir }}/plan/backend.tf"
-      src: templates/backend.j2
