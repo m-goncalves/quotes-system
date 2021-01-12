@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: quotes-api-v2
-  labels:
-    app: quotes-api
 spec:
   replicas: 1
   selector:
