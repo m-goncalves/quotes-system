@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quotes-api-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quotes-api
+  template:
+    metadata:
+      labels:
+        app: quotes-api
+        version: v1
+    spec:
+      initContainers:
+        - name: check-mysql
+          image: busybox:1.31.1
+          command: ['sh', '-c', 'until nslookup mysql.quotes-system.svc.cluster.local; do echo waiting for mysql; sleep 2; done;'] 
+      containers:
+      - name: quotes-api-v1
+        image: marjugoncalves/quotesapi:v1
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+        envFrom:
+          - configMapRef:
+              name: quotes-api
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
