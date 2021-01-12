@@ -1,9 +1,6 @@
 - name: configure tfvars
   import_tasks: tfvars.yaml
 
-# - name: configure backend
-#   import_tasks: backend.yaml
-
 - name: create cluster
   import_tasks: create_cluster.yaml
 
