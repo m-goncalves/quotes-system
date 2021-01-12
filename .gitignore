@@ -4,6 +4,7 @@ commands
 configmap.yaml
 crash.log
 .env
+istio-1.8.1
 localhost.yaml
 override.tf
 override.tf.json
