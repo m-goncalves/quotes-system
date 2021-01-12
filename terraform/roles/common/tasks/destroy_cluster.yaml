@@ -2,6 +2,7 @@
   shell: |
     export GOOGLE_APPLICATION_CREDENTIALS={{ playbook_dir }}/plan/auth/serviceaccount.json
     cd {{ playbook_dir }}/plan;
+    terraform workspace new {{ env }}
     terraform workspace select {{ env }}
     terraform destroy -var-file=env.tfvars -auto-approve
   when: (operation == "destroy")
