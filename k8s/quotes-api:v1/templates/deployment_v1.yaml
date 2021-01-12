@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.v1.name }}
+spec:
+  replicas: {{ .Values.v1.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.v1.name }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        app: {{ .Values.v1.labels.app }}
+        version: {{ .Values.v1.labels.version }}
+    spec:
+      initContainers:
+        - name: {{ .Values.v1.initContainers.name }}
+          image: {{ .Values.v1.initContainers.image }}
+          command: ['sh', '-c', 'until nslookup mysql.quotes-system.svc.cluster.local; do echo waiting for mysql; sleep 2; done;']
+      #     command:
+      #     - "sh"
+      #     - "-c"
+      #     - "until mysql --host=mysql.default.svc.cluster.local --user={MYSQL_USER} --password={MYSQL_PASSWORD} --execute=\"SELECT 1;\"; do echo waiting for mysql; sleep 2; done;" 
+      containers:
+      - name: {{ .Values.v1.name }}
+        image: {{ .Values.v1.image.name }}
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.v1.ports.containerPort }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.v1.name }}
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.v1.ports.containerPort}}
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.v1.ports.containerPort}}
+          initialDelaySeconds: 10
+          periodSeconds: 5
