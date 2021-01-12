@@ -2,9 +2,9 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: quotes-api
-  namespace: istio-system
+  # namespace: istio-system
 spec:
-  host: quotes-api.quotes-system.svc.cluster.local
+  host: quotes-api
   subsets:
     - name: v1
       labels:
