@@ -6,7 +6,7 @@ spec:
   selector:
     app: quotes-api
   ports:
-  - name: quotes-api
+  - name: tcp-quotes
     port: 80
     targetPort: 3000
   clusterIP: None
