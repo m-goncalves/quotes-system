@@ -1,9 +1,15 @@
 stages:
-  - install
-  - test
-  - release
+  - build-docker-image:
 
-install:
-  stage: install
+
+build-docker-image:
+  stage: build-docker-image
+  image: docker:latest
+  services:
+  - docker: dind
+  before_script:
+  - docker login -u $CI_REGISTRY_USER -P $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker image build -t marjugoncalves/quotesapi:1.0:
+  - cd ./quotes-api:v1
+  # - docker build --pull -t  $CI_REGISTRY_IMAGE
+  # - docker push $CI_REGISTRY_IMAGE
